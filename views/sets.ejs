@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lego Sets Collection</title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body tabindex="-1">
+  <!-- Include the navbar partial and set the active page -->
+  <%- include('partials/navbar', {page: '/lego/sets'}); %>
+
+  <!-- Hero section with filter links centered -->
+  <div class="hero" style="text-align: center;">
+    <div style="display: inline-block; padding: 10px;">
+      <a href="/lego/sets?theme=technic" class="btn btn-primary" style="margin: 5px;">Technic</a>
+      <a href="/lego/sets?theme=classic town" class="btn btn-secondary" style="margin: 5px;">Classic Town</a>
+      <a href="/lego/sets?theme=star wars" class="btn btn-success" style="margin: 5px;">Star Wars</a>
+      <!-- Add more buttons for other themes -->
+    </div>
+  </div>
+  
+  <!-- Table for displaying set data -->
+  <table>
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Theme</th>
+        <th>Year</th>
+        <th>Parts</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% sets.forEach(set => { %>
+        <tr>
+          <td><img src="<%= set.img_url %>" alt="<%= set.name %>" class="avatar" style="width: 100px; height: auto;"></td>
+          <td><%= set.name %></td>
+          <td><a href="/lego/sets?theme=<%= set.theme %>" class="button"><%= set.theme %></a></td>
+          <td><%= set.year %></td>
+          <td><%= set.num_parts %></td>
+          <td><a href="/lego/sets/<%= set.set_num %>" class="button">Details</a></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= set.name %></title>
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body tabindex="-1">
+  <%- include('partials/navbar', {page: ''}); %>
+
+  <br />
+
+  <div class="container mx-auto">
+    <div class="hero bg-base-200 rounded-lg p-6">
+      <div class="hero-content text-center">
+        <div class="max-w-md">
+          <h1 class="text-5xl font-bold"><%= set.name %></h1>
+          <p class="py-6">Below, you will find detailed information about the set: <%= set.name %>.</p>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <img class="w-full rounded-lg" src="<%= set.img_url %>" alt="<%= set.name %> image" />
+      </div>
+      <div class="prose">
+        <p>Year: <%= set.year %></p>
+        <p>Theme: <%= set.theme %></p>
+        <p>Number of Parts: <%= set.num_parts %></p>
+        <a href="/lego/editSet/<%= set.set_num %>" class="btn btn-success mt-4">Edit Set</a>
+        <div id="quote"></div>
+      </div>
+    </div>
+    
+    <a href="#" onclick="history.back(); return false;" class="btn btn-primary">Return to the previous page</a>
+
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch('https://api.quotable.io/random')
+        .then(response => response.json())
+        .then(data => {
+          const quoteElement = document.getElementById('quote');
+          quoteElement.innerHTML = `<blockquote>${data.content} — <em>${data.author}</em></blockquote>`;
+        })
+        .catch(error => {
+          console.error('Error fetching the quote:', error);
+          const quoteElement = document.getElementById('quote');
+          quoteElement.innerHTML = `<p>Quote not available at the moment.</p>`;
+        });
+    });
+  </script>
+
+</body>
+</html>
+
