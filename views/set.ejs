@@ -31,7 +31,10 @@
         <p>Year: <%= set.year %></p>
         <p>Theme: <%= set.theme %></p>
         <p>Number of Parts: <%= set.num_parts %></p>
-        <a href="/lego/editSet/<%= set.set_num %>" class="btn btn-success mt-4">Edit Set</a>
+        <!-- Conditional Rendering for Edit Button -->
+        <% if (session && session.user) { %>
+          <a href="/lego/editSet/<%= set.set_num %>" class="btn btn-success mt-4">Edit Set</a>
+        <% } %>
         <div id="quote"></div>
       </div>
     </div>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User History</title>
+    <!-- Add your stylesheet links here -->
+</head>
+<body>
+    <!-- Hero Section Displaying User Info -->
+    <div class="hero">
+        <h1>User History for <%= session.user.userName %></h1>
+        <p>Email: <%= session.user.email %></p>
+    </div>
+
+    <!-- Login History Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Login Date/Time</th>
+                <th>Client Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% session.user.loginHistory.forEach(function(history) { %>
+                <tr>
+                    <td><%= new Date(history.dateTime).toLocaleString() %></td>
+                    <td><%= history.userAgent %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</body>
+</html>
